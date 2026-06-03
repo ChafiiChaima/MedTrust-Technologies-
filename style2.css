@@ -1,0 +1,66 @@
+body{
+    font-family: Arial, sans-serif;
+    background:#f4f4f4;
+}
+
+.form-container{
+    width:700px;
+    margin:40px auto;
+    padding:30px;
+    border:1px solid #888;
+    background:white;
+
+}
+
+h1{
+    margin-bottom:25px;
+}
+
+.ligne{
+    display:flex;
+    align-items:center;
+    margin-bottom:12px;
+}
+
+label{
+    width:180px;
+    font-size:18px;
+}
+
+input{
+    width:300px;
+    padding:8px;
+    border:1px solid #2f4c8a;
+}
+
+.micro-box{
+    display:flex;
+}
+
+.micro{
+    width:50px;
+    border:none;
+    cursor:pointer;
+    font-size:22px;
+    background:white;
+}
+
+.btn-enregistrer{
+    margin-top:20px;
+    margin-left:180px;
+    width:300px;
+    padding:12px;
+    background:#7890c7;
+    color:white;
+    border:none;
+    cursor:pointer;
+    font-size:18px;
+}
+
+.btn-enregistrer:hover{
+    background:#5e76af;
+}
+.micro img{
+    width: 25px;
+    height: 30px;
+}

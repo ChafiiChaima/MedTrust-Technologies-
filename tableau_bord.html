@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suivi des tâches</title>
+    <link rel="stylesheet" href="style1.css">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="top-bar">
+
+        <div class="recherche">
+            <label>Projet :</label>
+
+            <select id="projetRecherche">
+            <option value="">-- Choisir un projet --</option>
+            </select>
+
+        </div>
+        <div>
+        <button class="btn-ajouter" onclick="location.href='ajouter_tache.html'">
+            + Ajouter une nouvelle tâche
+        </button>
+        <button class="btn-export" onclick="location.href='export.html'">
+            Export
+        </button>
+        </div>
+
+    </div>
+
+    <table border="1">
+    <thead>
+        <tr>
+            <th>Projet</th>
+            <th>Client</th>
+            <th>Tâche</th>
+            <th>Date</th>
+            <th>Chargé</th>
+            <th>Début</th>
+            <th>Fin</th>
+            <th>Temps écoulé</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+    <tbody id="listeTaches"></tbody>
+</table>
+
+    
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Voice Input</title>
+</head>
+
+<body>
+
+<h2>Saisie vocale</h2>
+
+<input type="text" id="text" placeholder="Parle..." />
+<button onclick="startVoice()">🎤 Parler</button>
+
+<script>
+function startVoice() {
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+  if (!SpeechRecognition) {
+    alert("Ton navigateur ne supporte pas la reconnaissance vocale");
+    return;
+  }
+
+  const recognition = new SpeechRecognition();
+  recognition.lang = "fr-FR"; // langue française
+
+  recognition.start();
+
+  recognition.onresult = function(event) {
+    const text = event.results[0][0].transcript;
+    document.getElementById("text").value = text;
+  };
+
+  recognition.onerror = function() {
+    alert("Erreur de reconnaissance vocale");
+  };
+}
+</script>
+
+</body>
+</html>

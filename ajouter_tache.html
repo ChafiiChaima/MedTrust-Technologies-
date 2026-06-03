@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ajouter une tâche</title>
+
+<link rel="stylesheet" href="style2.css">
+
+</head>
+<body>
+
+<div class="form-container">
+
+    <h1>Ajouter une tâche</h1>
+
+    <div class="ligne">
+        <label>Projet :</label>
+        <input type="text" id="projet" required>
+    </div>
+
+    <div class="ligne">
+        <label>Client :</label>
+        <input type="text" id="client" required >
+    </div>
+
+    <div class="ligne">
+        <label>Tâche :</label>
+        <input type="text" id="tache" placeholder="ecrivez votre tâche..."  required/>
+        <button onclick="startVoice()">🎤</button>
+    </div>
+
+    <div class="ligne">
+        <label>Date :</label>
+        <input type="date" id="date" required>
+    </div>
+
+    <div class="ligne">
+        <label>Chargé :</label>
+        <input type="text" id="charge" required>
+    </div>
+
+    <div class="ligne">
+        <label>Heure début :</label>
+        <input type="time" id="debut" required>
+    </div>
+
+    <div class="ligne">
+        <label>Heure fin :</label>
+        <input type="time" id="fin" required>
+    </div>
+
+    <button
+        class="btn-enregistrer"
+        onclick="enregistrerTache()">
+        Enregistrer
+    </button>
+
+</div>
+
+<script src="ajouter_tache.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+.export-container{
+    border:1px solid #000;
+    padding:30px;
+    width:800px;
+    margin:auto;
+}
+
+select{
+    width:300px;
+    height:35px;
+}
+
+button{
+    width:160px;
+    height:40px;
+    cursor:pointer;
+    background:#7289c4;
+    color:white;
+    border:none;
+    padding:12px 20px;
+    
+}
+h2{
+    color: #2d437a;
+}
+body{
+    padding-left: 50px;
+    margin-top: 60px;
+}

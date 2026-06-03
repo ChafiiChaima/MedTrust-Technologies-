@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EXPORT</title>
+    <link rel="stylesheet" href="style3.css">
+</head>
+<body>
+    <div class="export-container">
+
+    <h2>Export :</h2>
+
+    <label><b>Type d'Export :   </b></label>
+
+<select id="typeExport" onchange="afficherFormulaire()">
+    <option value="">-- Sélectionner --</option>
+    <option value="total">Export total</option>
+    <option value="projet">Export par projet</option>
+    <option value="charge">Export par chargé</option>
+</select>
+
+<div id="contenu">
+</div>
+
+    <br><br>
+
+    <button onclick="exporterExcel()">
+        Export
+    </button>
+
+</div>
+<script src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script>
+    
+</body>
+<script>
+    function afficherFormulaire() {
+        let choix = document.getElementById("typeExport").value;
+        let contenu = document.getElementById("contenu");
+
+        if (choix === "total") {
+            contenu.innerHTML = `<br>
+                <h3>Export total</h3>
+                <p>Tous les projets seront exportés.</p>
+            `;
+        }
+        else if (choix === "projet") {
+            contenu.innerHTML = `<br><br><br>
+                <form>
+                    <label><b>Donner le nom de projet :</b></label>
+                    <input type="text" id="id_projet">
+                </form>
+            `;
+        }
+        else if (choix === "charge") {
+            contenu.innerHTML = `<br><br><br>
+                <form>
+                    <label><b>Donner le nom de chargé :</b></label>
+                    <input type="text" id="id_charge">
+                </form>
+            `;
+        }
+    }
+
+function calculerDuree(debut, fin){
+
+    let h1 = debut.split(":");
+    let h2 = fin.split(":");
+
+    let debutMinutes =
+    parseInt(h1[0]) * 60 +
+    parseInt(h1[1]);
+
+    let finMinutes =
+    parseInt(h2[0]) * 60 +
+    parseInt(h2[1]);
+
+    let duree =
+    finMinutes - debutMinutes;
+
+    let heures =
+    Math.floor(duree / 60);
+
+    let minutes =
+    duree % 60;
+
+    return heures + "h " + minutes + "min";
+}
+
+function exporterExcel() {
+
+    let type =
+    document.getElementById("typeExport").value;
+
+    let liste =
+    JSON.parse(localStorage.getItem("taches")) || [];
+
+    let donnees = [];
+
+    if(type === "total"){
+
+        donnees = liste;
+    }
+
+    else if(type === "projet"){
+
+        let projet =
+        document.getElementById("id_projet").value;
+
+        donnees =
+        liste.filter(t =>
+            t.projet.toLowerCase() ===
+            projet.toLowerCase()
+        );
+    }
+
+    else if(type === "charge"){
+
+        let charge =
+        document.getElementById("id_charge").value;
+
+        donnees =
+        liste.filter(t =>
+            t.charge.toLowerCase() ===
+            charge.toLowerCase()
+        );
+    }
+
+    if(donnees.length === 0){
+
+        alert("Aucune donnée trouvée");
+        return;
+    }
+
+    let tableauExcel = [];
+
+    donnees.forEach(function(t){
+
+        tableauExcel.push({
+
+            Projet : t.projet,
+            Client : t.client,
+            Tache : t.tache,
+            Date : t.date,
+            Charge : t.charge,
+            Debut : t.debut,
+            Fin : t.fin,
+            Duree : calculerDuree(
+                t.debut,
+                t.fin
+            )
+
+        });
+
+    });
+
+    let feuille =
+    XLSX.utils.json_to_sheet(tableauExcel);
+
+    let classeur =
+    XLSX.utils.book_new();
+
+    XLSX.utils.book_append_sheet(
+        classeur,
+        feuille,
+        "Taches"
+    );
+
+    XLSX.writeFile(
+        classeur,
+        "Export_Taches.xlsx"
+    );
+}
+</script>
+</html>

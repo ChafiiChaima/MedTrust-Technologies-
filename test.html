@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Gestion Projet</title>
+<style>
+body{
+    font-family: Arial, sans-serif;
+    margin: 30px;
+}
+
+input, button{
+    padding: 8px;
+    margin: 5px;
+}
+
+table{
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td{
+    border: 1px solid black;
+    padding: 10px;
+}
+</style>
+</head>
+<body>
+
+<h2>Ajouter un projet</h2>
+
+<label>Nom du projet :</label>
+<input type="text" id="nomProjet">
+
+<button onclick="ajouterProjet()">
+    Ajouter
+</button>
+
+<h2>Liste des projets</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Projet</th>
+        </tr>
+    </thead>
+    <tbody id="listeProjet">
+
+    </tbody>
+</table>
+
+<script>
+
+function ajouterProjet() {
+
+    let nom = document.getElementById("nomProjet").value;
+
+    if(nom === ""){
+        alert("Saisir un nom !");
+        return;
+    }
+
+    let projets =
+        JSON.parse(localStorage.getItem("projets")) || [];
+
+    projets.push(nom);
+
+    localStorage.setItem(
+        "projets",
+        JSON.stringify(projets)
+    );
+
+    document.getElementById("nomProjet").value = "";
+
+    afficherProjets();
+}
+
+function afficherProjets() {
+
+    let projets =
+        JSON.parse(localStorage.getItem("projets")) || [];
+
+    let contenu = "";
+
+    for(let i=0; i<projets.length; i++) {
+
+        contenu += `
+        <tr>
+            <td>${i+1}</td>
+            <td>${projets[i]}</td>
+        </tr>
+        `;
+    }
+
+    document.getElementById("listeProjet").innerHTML = contenu;
+}
+
+afficherProjets();
+
+</script>
+
+</body>
+</html>
