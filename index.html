@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>MedTrust Technologies</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="logo">
+            <a href="tableau_bord.html" target="contenu">
+                <img src="logo.png" alt="Logo">
+                <span>MedTrust technologies</span>
+            </a>
+        </div>
+
+        <nav>
+            <div class="menu-container">
+                <button id="menuBtn" class="menu-btn">☰</button>
+
+                <div id="menu" class="dropdown">
+                    <div class="titre_menu"><img src="logo.png" alt="Logo"><span><b>MedTrust technologies</b></span></div>
+                    <br>
+                    <a href="tableau_bord.html" target="contenu">Tableau de bord</a>
+                    <a href="ajouter_tache.html" target="contenu">Ajouter une tâche</a>
+                    <a href="export.html" target="contenu">Export</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- MAIN -->
+    <main>
+        <iframe
+            name="contenu"
+            src="tableau_bord.html">
+        </iframe>
+        <div id="notif" class="notif">
+        ⏰ N’oubliez pas de remplir les données !
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        © 2026 MedTrust Technologies
+    </footer>
+
+</body>
+<script>
+    const menuBtn = document.getElementById("menuBtn");
+    const menu = document.getElementById("menu");
+
+    menuBtn.addEventListener("click", function() {
+    menu.classList.toggle("show");
+});
+
+// Demander l'autorisation des notifications
+if (Notification.permission !== "granted") {
+    Notification.requestPermission();
+}
+
+// Détecter quand l'utilisateur quitte l'onglet
+document.addEventListener("visibilitychange", function () {
+
+    if (document.hidden) {
+
+        // Vérifier que l'autorisation est accordée
+        if (Notification.permission === "granted") {
+
+            new Notification("MedTrust Technologies", {
+                body: "N'oubliez pas de remplir vos données.",
+                icon: "logo.png"
+            });
+
+        }
+
+    }
+
+});
+
+
+</script>
+</html>
